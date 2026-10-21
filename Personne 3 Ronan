@@ -1,0 +1,4 @@
+Créer LNX-WEB01 avec Linux Rocky 10. Installation de Nginx sur cette VM. Je nais pas encore tester la page Ethranet 
+Créer LNX-OPS01 avec Linux Rocky 10. J'ai ajouter les 3 disque pour faire le RAID 1 que j'ai juste installer. Je d
+Sinon les 2 VM sont connecté sur Tailscale et arrivent à se PING et aussi assemblé toutes les VM des autres personnes ensemble pour pouvoir que je travaille avec la personne 4 sur LNX-OPS01
+Je doit encore créer la dernière VM sous Ubumto. 
