@@ -1,4 +1,32 @@
-Créer LNX-WEB01 avec Linux Rocky 10. Installation de Nginx sur cette VM. Je nais pas encore tester la page Ethranet 
-Créer LNX-OPS01 avec Linux Rocky 10. J'ai ajouter les 3 disque pour faire le RAID 1 que j'ai juste installer. Je d
+Création de LNX-WEB01 avec Linux Rocky 10. Installation de Nginx sur cette VM. Je nais pas encore tester la page Ethranet
+
+Création de LNX-OPS01 avec Linux Rocky 10. J'ai ajouter les 3 disque pour faire le RAID 1 que j'ai juste installer. 
 Sinon les 2 VM sont connecté sur Tailscale et arrivent à se PING et aussi assemblé toutes les VM des autres personnes ensemble pour pouvoir que je travaille avec la personne 4 sur LNX-OPS01
-Je doit encore créer la dernière VM sous Ubumto. 
+Tout ce qu'il est RAID 1, LVM et XFS et ses quota sur LNX-OPS01
+1. Installer les outils nécessaires
+La commande sudo dnf install mdadm lvm2 xfsprogs -y installe les outils permettant de gérer le RAID, les volumes logiques LVM et le système de fichiers XFS.
+2. Créer le RAID 1
+La commande sudo mdadm --create /dev/md0 --level=1 --raid-devices=2 /dev/sdb /dev/sdc crée un RAID 1 avec les deux disques de données /dev/sdb et /dev/sdc, afin de dupliquer les données sur les deux disques.
+La commande cat /proc/mdstat permet ensuite de vérifier l’état du RAID et de voir si les deux disques fonctionnent correctement.
+3. Configurer LVM
+La commande sudo pvcreate /dev/md0 transforme le RAID en volume physique utilisable par LVM.
+La commande sudo vgcreate vg_date /dev/md0 crée le groupe de volumes appelé vg_date.
+La commande sudo lvcreate -l 100%FREE -n lv_data vg_date crée le volume logique lv_data en utilisant tout l’espace disponible dans le groupe de volumes.
+4. Formater et monter le stockage
+La commande sudo mkfs.xfs /dev/vg_date/lv_data formate le volume logique avec le système de fichiers XFS.
+La commande sudo mkdir -p /data crée le dossier /data, qui servira de point de montage.
+La commande sudo mount /dev/vg_date/lv_data /data monte le volume logique dans le dossier /data pour pouvoir y stocker des fichiers.
+La commande df -h /data affiche l’espace total, utilisé et disponible sur le stockage monté dans /data.
+5. Configurer le montage automatique
+La commande sudo blkid /dev/vg_date/lv_data permet de récupérer l’UUID du volume, c’est-à-dire son identifiant unique.
+Dans le fichier /etc/fstab, la ligne UUID=427c44f5-b17b-4412-b69b-bf08a5f47f15 /data xfs defaults,uquota,gquota 0 0 permet de monter automatiquement le volume dans /data au démarrage et d’activer les options de quotas utilisateurs et groupes.
+La commande sudo systemctl daemon-reload demande à systemd de recharger sa configuration après les modifications nécessaires.
+La commande findmnt -no OPTIONS /data permet de vérifier les options de montage et de confirmer la présence de usrquota et grpquota.
+6. Configurer les quotas de stockage
+La commande sudo xfs_quota -x -c 'state' /data vérifie si la gestion des quotas XFS est activée sur /data.
+La commande sudo xfs_quota -x -c 'limit -u bsoft=800m bhard=1g admin' /data définit pour l’utilisateur admin une limite souple de 800 Mo et une limite stricte de 1 Go.
+La commande sudo xfs_quota -x -c 'report -h -u' /data affiche les quotas des utilisateurs pour vérifier les limites configurées.
+7. Redémarrer et vérifier
+La commande sudo reboot redémarre la machine afin de vérifier que la configuration fonctionne après un redémarrage.
+La commande sudo poweroff éteint la machine.
+Je doit encore créer la dernière VM sous Ubumto J'ai créer la 3ème VM avec Ubumto seulement. Je l'ai mis sur Tailscale 
