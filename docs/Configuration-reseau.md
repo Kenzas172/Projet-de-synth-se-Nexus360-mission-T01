@@ -56,6 +56,6 @@ Les réseaux virtuels VMnet2 et VMnet3 ont été créés
 et les adresses IP des deux serveurs ont été configurées.
 
 Les tests de connectivité et la configuration du routage
-restent à effectuer.
+restent à effectuer.  
 
 La vérification du service DNS sera documentée séparément.
