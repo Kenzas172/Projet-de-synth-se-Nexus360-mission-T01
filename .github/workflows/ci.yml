@@ -1,0 +1,38 @@
+
+name: Nexus360 CI
+
+on:
+  push:
+    branches:
+      - main
+      - gloria-ci-cd
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  validate:
+    name: Validate project files
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check YAML files
+        run: |
+          python3 -m pip install yamllint
+          find . -type f \( -name "*.yml" -o -name "*.yaml" \) \
+            -not -path "./.git/*" \
+            -exec yamllint -d relaxed {} +
+
+      - name: Check shell scripts
+        run: |
+          if find . -name "*.sh" -not -path "./.git/*" | grep -q .; then
+            sudo apt-get update
+            sudo apt-get install -y shellcheck
+            find . -name "*.sh" -not -path "./.git/*" \
+              -exec shellcheck {} +
+          else
+            echo "No shell scripts found."
+          fi
