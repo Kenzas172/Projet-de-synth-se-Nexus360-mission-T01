@@ -1,0 +1,29 @@
+# Configuration DHCP — Nexus360
+
+## 1. Présentation
+
+Le DHCP permet de donner automatiquement une adresse IP aux ordinateurs du réseau.
+
+## 2. Installation
+
+Le rôle DHCP est prévu sur le serveur SRV-DC01.
+
+## 3. Rôle du DHCP
+
+Le DHCP permet de :
+- Attribuer automatiquement des adresses IP.
+- Fournir le masque réseau.
+- Indiquer la passerelle.
+- Indiquer le serveur DNS.
+- Simplifier la connexion des ordinateurs au réseau.
+
+## 4. Configuration
+
+Le réseau du projet utilise des adresses IP dans la plage `10.36.0.0/16`.
+
+Chaque site possède son propre réseau.
+
+
+## 5. Bilan
+
+Le DHCP facilite la gestion des adresses IP sur le réseau Nexus360.
