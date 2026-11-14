@@ -1,0 +1,50 @@
+# Réplication Active Directory
+
+## 1. Présentation
+
+Le projet Nexus360 utilise deux contrôleurs de domaine :
+
+- **SRV-DC01** : premier contrôleur de domaine.
+- **SRV-DC02** : deuxième contrôleur de domaine.
+
+La réplication Active Directory permet de synchroniser les informations entre les deux contrôleurs de domaine.
+
+## 2. Fonctionnement
+
+Les informations qui doivent être synchronisées comprennent notamment :
+
+- Les comptes utilisateurs.
+- Les groupes de sécurité.
+- Les unités d'organisation (OU).
+- Les objets Active Directory.
+
+Cette synchronisation permet aux deux contrôleurs de domaine de disposer des mêmes informations.
+
+## 3. Objectifs
+
+La réplication permet de :
+
+- Maintenir les données Active Directory à jour.
+- Assurer la disponibilité du domaine.
+- Éviter de dépendre d'un seul contrôleur de domaine.
+
+
+## 5. Problème rencontré
+
+La réplication entre SRV-DC01 et SRV-DC02 n'a pas fonctionné.
+
+Le problème venait de la configuration réseau liée à Tailscale. Les deux contrôleurs de domaine se trouvaient sur des réseaux différents et aucune passerelle ne permettait la communication entre ces deux réseaux.
+
+Les serveurs ne pouvaient donc pas communiquer correctement pour effectuer la réplication Active Directory.
+
+## 6. Solution à prévoir
+
+Pour résoudre ce problème, il faudra mettre en place une configuration de routage adaptée afin de permettre la communication entre les deux réseaux.
+
+Il faudra ensuite vérifier que les deux contrôleurs de domaine peuvent communiquer et relancer les tests de réplication.
+
+## 7. Conclusion
+
+La réplication Active Directory n'a pas pu être réalisée à cause d'un problème de communication réseau.
+
+Cette difficulté a montré l'importance de configurer correctement le routage et les passerelles entre les différents réseaux du projet Nexus360.
