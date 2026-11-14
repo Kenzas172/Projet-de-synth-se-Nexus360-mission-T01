@@ -2,45 +2,30 @@
 
 ## 1. Présentation
 
-SRV-DC01 est le serveur principal de l'infrastructure Nexus360.
-Il héberge les services nécessaires à la gestion centralisée
-des utilisateurs et des ordinateurs du domaine.
+SRV-DC01 est le serveur principal du projet Nexus360.
 
-## 2. Environnement technique
+## 2. Installation
 
-- Système : Windows Server 2025 Standard Evaluation
-- Mode d'installation : Desktop Experience
-- Hyperviseur : VMware Workstation
-- Nom du serveur : SRV-DC01
-- Adresse IPv4 : 10.36.11.10/24
-- Domaine Active Directory : ad.nexus360.test
+J'ai créé une machine virtuelle sur VMware Workstation.
 
-## 3. Configuration réalisée
+J'ai ensuite installé Windows Server 2025 Standard Evaluation avec l'interface graphique.
 
-- Installation de Windows Server 2025.
-- Configuration du nom du serveur.
-- Configuration de l'adresse IPv4 statique.
-- Installation du rôle Active Directory Domain Services (AD DS).
-- Promotion du serveur en contrôleur de domaine.
-- Création du domaine ad.nexus360.test.
-- Vérification du domaine avec la console
-  Utilisateurs et ordinateurs Active Directory.
+## 3. Configuration
 
-## 4. Services prévus
+Après l'installation, j'ai :
 
-- Active Directory : gestion des comptes et des ordinateurs.
-- DNS : résolution des noms du domaine.
-- DHCP : attribution automatique des adresses IP.
+- Configuré le nom du serveur.
+- Défini le mot de passe Administrateur.
+- Installé deux cartes réseau.
+- Configuré les adresses IP.
 
-## 5. État d'avancement
+## 4. Active Directory
 
-Le domaine Active Directory a été créé.
-La configuration et les tests des services DNS et DHCP
-restent à documenter.
+J'ai installé le rôle Active Directory Domain Services.
 
-## 6. Prochaines étapes
+J'ai ensuite créé le domaine `ad.nexus360.test`.
 
-- Vérifier la zone DNS du domaine.
-- Tester la résolution DNS.
-- Configurer et tester le service DHCP.
-- Préparer l'intégration du serveur SRV-DC02.
+## 5. Bilan
+
+SRV-DC01 est installé et configuré. Il sert de serveur principal pour le domaine Nexus360. service DHCP.
+
