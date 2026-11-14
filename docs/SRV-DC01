@@ -1,0 +1,23 @@
+# SRV-DC01
+
+## Présentation
+SRV-DC01 est le serveur principal du projet Nexus360.
+
+## Informations
+- Système : Windows Server 2025
+- Nom : SRV-DC01
+- Domaine : ad.nexus360.test
+- Adresse IP : 10.36.11.10
+
+## Rôle du serveur
+Ce serveur permet de :
+- Gérer les utilisateurs.
+- Gérer les ordinateurs.
+- Gérer les connexions au domaine.
+- Fournir les services DNS et DHCP (à vérifier).
+
+## Sécurité
+Les accès sont gérés selon les droits de chaque utilisateur.
+
+## Documentation
+Ce dossier contient les informations et les captures d'écran de SRV-DC01.
