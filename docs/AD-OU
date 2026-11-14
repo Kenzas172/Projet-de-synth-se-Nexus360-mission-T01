@@ -1,0 +1,65 @@
+# Organisation Active Directory — Nexus360
+
+## 1. Présentation
+
+J'ai organisé Active Directory pour faciliter la gestion des utilisateurs, des ordinateurs et des groupes du projet Nexus360.
+
+## 2. Organisation des ordinateurs
+
+Dans l'OU Ordinateurs, j'ai classé les machines du projet par catégorie :
+
+- Serveurs
+- Postes c
+
+Cela permet de retrouver plus facilement les machines du domaine.
+
+## 3. Organisation des groupes
+
+J'ai créé plusieurs groupes pour gérer les utilisateurs et leurs droits.
+
+### Groupes GG
+
+- GG_Compta
+- GG_Direction
+- GG_Informatique
+- GG_Admin_T0
+- GG_Admin_T1
+- GG_Admin_T2
+
+### Groupes DL
+
+- DL_Compta
+- DL_Direction
+- DL_Informatique
+
+Les groupes GG regroupent les utilisateurs selon leur service ou leur rôle.
+
+Les groupes DL servent à gérer les droits d'accès aux ressources.
+
+## 4. Organisation des utilisateurs
+
+Dans l'OU Utilisateurs, j'ai séparé les comptes selon les secteurs de travail :
+
+- Comptabilité
+- Direction
+- Informatique
+
+Chaque utilisateur possède son propre compte pour se connecter au domaine.
+
+## 5. Sécurité des mots de passe
+
+J'ai configuré des règles pour renforcer la sécurité des comptes utilisateurs.
+
+Les règles comprennent :
+
+- Un minimum de 12 caractères.
+- Une durée de validité de 90 jours.
+- Le changement du mot de passe lors de la première connexion.
+
+Les utilisateurs doivent donc définir leur propre mot de passe lors de leur première connexion.
+
+## 6. Bilan
+
+Cette organisation permet de mieux gérer les utilisateurs, les ordinateurs et les droits d'accès.
+
+Elle permet également de renforcer la sécurité du domaine Nexus360.
