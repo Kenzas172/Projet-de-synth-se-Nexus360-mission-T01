@@ -1,0 +1,34 @@
+# Installation de SRV-DC02
+
+## 1. Présentation
+
+SRV-DC02 est le deuxième contrôleur de domaine du projet Nexus360.
+
+Il permet d'assurer la continuité des services Active Directory et DNS en cas de problème sur SRV-DC01.
+
+## 2. Configuration de la machine
+
+| Élément | Configuration |
+|---|---|
+| Nom | SRV-DC02 |
+| Système | Windows Server 2025 Core |
+| Adresse IP | 10.36.12.11 |
+| Domaine | ad.nexus360.test |
+| Rôle prévu | Contrôleur de domaine secondaire |
+
+## 3. Rôles prévus
+
+SRV-DC02 doit assurer les fonctions suivantes :
+
+- Contrôleur de domaine supplémentaire.
+- Réplication Active Directory avec SRV-DC01.
+- Service DNS intégré à Active Directory.
+- Service DHCP avec basculement (*Failover*) avec SRV-DC01.
+
+## 4. Objectif
+
+L'objectif de SRV-DC02 est d'améliorer la disponibilité des services du domaine et d'éviter qu'une panne de SRV-DC01 bloque toute l'infrastructure Nexus360.
+
+## 5. État de configuration
+
+Les rôles et la réplication devront être vérifiés après l'installation et la promotion du serveur.

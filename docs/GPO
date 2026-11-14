@@ -1,0 +1,125 @@
+# Gestion des stratégies de groupe (GPO)
+
+## 1. Présentation
+
+Les stratégies de groupe (GPO) permettent de gérer et de centraliser la configuration des utilisateurs et des ordinateurs du domaine `ad.nexus360.test`.
+
+Elles permettent notamment de renforcer la sécurité, de gérer les droits d'administration et de contrôler les mises à jour Windows.
+
+
+## 2. Restrictions des comptes administrateurs
+
+Le projet utilise trois niveaux d'administration afin de séparer les responsabilités et de limiter les risques de sécurité.
+
+### Niveau T0 – Administration Active Directory
+
+Comptes :
+- `Admin Directory`
+- `Admin Secondaire`
+
+Groupe :
+- `GG_Admin_T0`
+
+Restrictions :
+- Les comptes T0 sont réservés à l'administration de l'Active Directory et des contrôleurs de domaine.
+- Ils ne doivent pas ouvrir de session sur les serveurs membres.
+- Ils ne doivent pas ouvrir de session sur les postes de travail.
+- Leur utilisation doit être limitée aux opérations d'administration du domaine.
+
+### Niveau T1 – Administration des serveurs
+
+Compte :
+- `Admin Serveur`
+
+Groupe :
+- `GG_Admin_T1`
+
+Restrictions recommandées :
+- Le compte T1 est utilisé pour administrer les serveurs membres.
+- Il ne doit pas être utilisé pour les tâches quotidiennes.
+- Il ne doit pas être utilisé pour administrer les postes de travail.
+- Il ne doit pas être utilisé pour ouvrir une session sur les contrôleurs de domaine.
+
+### Niveau T2 – Administration des postes de travail
+
+Compte :
+- `Admin Poste`
+
+Groupe :
+- `GG_Admin_T2`
+
+Restrictions recommandées :
+- Le compte T2 est utilisé pour administrer les postes de travail.
+- Il ne doit pas être utilisé pour administrer les serveurs.
+- Il ne doit pas être utilisé pour administrer les contrôleurs de domaine.
+- Il ne doit pas être utilisé pour les tâches quotidiennes.
+
+
+## 2. Gestion des comptes administrateurs
+
+Le projet utilise trois niveaux d'administration :
+
+- **T0 :** administration de l'Active Directory et des contrôleurs de domaine.
+- **T1 :** administration des serveurs.
+- **T2 :** administration des postes de travail.
+
+Les comptes administrateurs utilisés sont :
+
+| Niveau | Compte |
+|---|---|
+| T0 | Admin Directory |
+| T0 | Admin Secondaire |
+| T1 | Admin Serveur |
+| T2 | Admin Poste |
+
+Les groupes associés sont :
+
+- `GG_Admin_T0`
+- `GG_Admin_T1`
+- `GG_Admin_T2`
+
+Les comptes T0 ne doivent pas pouvoir ouvrir de session sur les machines autres que les contrôleurs de domaine.
+
+## 3. Stratégies de groupe prévues
+
+Les GPO suivantes sont prévues pour répondre aux besoins du projet :
+
+| GPO | Objectif |
+|---|---|
+| GPO-T0-Restriction | Limiter les connexions des comptes T0 aux contrôleurs de domaine. |
+| GPO-T1-Administration | Gérer les droits d'administration des serveurs. |
+| GPO-T2-Administration | Gérer les droits d'administration des postes de travail. |
+| GPO-Windows-Durcissement | Renforcer la sécurité de Windows. |
+| GPO-LAPS | Gérer les mots de passe des comptes administrateurs locaux. |
+| GPO-WSUS | Configurer les mises à jour Windows via WSUS. |
+
+
+## 4. Politique de mots de passe
+
+Les comptes utilisateurs doivent respecter les règles suivantes :
+
+- Minimum de 12 caractères.
+- Durée de validité de 90 jours.
+- Changement du mot de passe obligatoire à la première connexion.
+
+## 5. Gestion des mises à jour
+
+Le serveur `SRV-MGT01` doit héberger WSUS afin de centraliser la gestion des mises à jour Windows.
+
+Deux groupes de mise à jour sont prévus pour répartir les installations. Les deux contrôleurs de domaine ne doivent jamais être placés dans le même groupe.
+
+## 6. Protection des comptes administrateurs locaux
+
+LAPS doit être utilisé pour gérer les mots de passe des comptes administrateurs locaux des serveurs membres et des postes de travail.
+
+La lecture des mots de passe doit être limitée aux administrateurs autorisés selon leur niveau.
+
+## 7. Objectif de sécurité
+
+Les stratégies de groupe permettent de :
+
+- Centraliser la configuration Windows.
+- Limiter les accès administrateurs.
+- Renforcer la sécurité des machines.
+- Gérer les mises à jour.
+- Protéger les comptes administrateurs locaux.

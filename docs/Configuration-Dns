@@ -1,0 +1,60 @@
+# Configuration DNS — Nexus360
+
+## 1. Présentation
+
+Le DNS permet de traduire les noms des machines en adresses IP.
+
+Il permet par exemple de retrouver un serveur grâce à son nom au lieu de retenir son adresse IP.
+
+## 2. Installation
+
+Le service DNS a été installé sur SRV-DC01 avec Active Directory.
+
+## 3. Configuration du domaine
+
+Le domaine utilisé dans le projet est :
+
+`ad.nexus360.test`
+
+Le serveur SRV-DC01 utilise l'adresse IP :
+
+`10.36.11.10`
+
+## 4. Rôle du DNS
+
+Le DNS permet de :
+
+- Retrouver les machines du réseau.
+- Trouver le contrôleur de domaine.
+- Permettre aux ordinateurs de rejoindre le domaine.
+- Faciliter la communication entre les serveurs.
+
+## 5. Zones DNS
+
+Active Directory utilise une zone DNS pour retrouver les machines du domaine.
+
+Les enregistrements DNS permettent d'associer un nom à une adresse IP.
+
+## 6. Vérifications
+
+Pour vérifier le fonctionnement du DNS, on peut utiliser les commandes suivantes dans PowerShell :
+
+`nslookup ad.nexus360.test`
+
+`nslookup SRV-DC01.ad.nexus360.test`
+
+Ces commandes permettent de vérifier la résolution des noms.
+
+## 8. Difficultés rencontrées
+
+J'ai rencontré des problèmes avec le DNS à cause des deux cartes réseau de SRV-DC01.
+
+Le serveur possédait une carte réseau pour le réseau interne et une autre pour l'accès à Internet.
+
+La présence de plusieurs adresses IP a compliqué la configuration du DNS et la résolution du domaine.
+
+J'ai dû vérifier la configuration réseau et le serveur DNS utilisé par les machines.
+
+## 9. Bilan
+
+Après ces vérifications, j'ai pu avancer dans la configuration du DNS pour le domaine Nexus360.
